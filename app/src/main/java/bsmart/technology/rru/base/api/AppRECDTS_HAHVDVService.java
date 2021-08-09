@@ -12,7 +12,6 @@ import rx.Observable;
 
 /**
  * For HA API URL
- * HOST: https://app.recdts.eac.int
  */
 public interface AppRECDTS_HAHVDVService {
 
