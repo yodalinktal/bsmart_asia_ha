@@ -44,9 +44,9 @@ public class RECDTSApi {
     }
 
     public static String base_ha_hv_dv_Url() {
-        return "https://taapp.eacpass.eac.int/api/";
+        return "http://18.136.103.132/api/";
     }
     public static String base_recdts_ha_hv_dv_Url() {
-        return "https://app.recdts.eac.int/api/";
+        return "http://18.136.103.132/api/";
     }
 }
