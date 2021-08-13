@@ -397,7 +397,8 @@ public class BarCodeFragment extends BaseFragment {
                 test9,test10,test11,test12,
                 test13,test14,test15,
                 temperFloat,
-                ProfileUtils.getCUserRid(),
+                ProfileUtils.getLoginClinicCode(),
+                ProfileUtils.getLoginCountryCode(),
                 comm);
         Location mLocation = LocationUtils.getInstance(this.getContext()).showLocation();
         if (null != mLocation){

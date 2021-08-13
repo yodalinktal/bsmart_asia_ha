@@ -49,8 +49,7 @@ public class HealthUtil {
             String test1Result,String test2Result,String test3Result,String test4Result,
             String test5Result,String test6Result,String test7Result,String test8Result,
             String test9Result,String test10Result,String test11Result,String test12Result,
-            String test13Result,String test14Result,String test15Result,Float temperature,
-            String c_user_rid,String remark
+            String test13Result,String test14Result,String test15Result,Float temperature,String clinicCode,String countryCode,String remark
     ){
 
         Map<String,Object> map = new HashMap<>();
@@ -73,10 +72,10 @@ public class HealthUtil {
         map.put("i_other_wear_personal_protective",test15Result);
 
         map.put("i_body_temp",temperature);
-
+        map.put("c_user_rid",countryCode+"-"+clinicCode);
         map.put("v_other_remark",remark);
-        map.put("v_clinic_rid",remark);
-        map.put("v_clinic_facility_code",remark);
+        map.put("v_clinic_rid",clinicCode);
+        map.put("v_clinic_facility_code",clinicCode);
         map.put("n_latitude",3.020321);
         map.put("n_longitude",2.000012);
 
