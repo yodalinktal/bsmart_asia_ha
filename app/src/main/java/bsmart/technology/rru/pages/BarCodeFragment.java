@@ -42,10 +42,13 @@ import bsmart.technology.rru.base.BaseFragment;
 import bsmart.technology.rru.base.api.NetSubscriber;
 import bsmart.technology.rru.base.api.NetTransformer;
 import bsmart.technology.rru.base.api.RECDTSApi;
+import bsmart.technology.rru.base.api.bean.COVID_19_Bean;
+import bsmart.technology.rru.base.api.bean.Vaccination_Bean;
 import bsmart.technology.rru.base.utils.ChannelUtil;
 import bsmart.technology.rru.base.utils.HeaderView;
 import bsmart.technology.rru.base.utils.HealthUtil;
 import bsmart.technology.rru.base.utils.LocationUtils;
+import bsmart.technology.rru.base.utils.ParseUtils;
 import bsmart.technology.rru.base.utils.ProfileUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -410,6 +413,9 @@ public class BarCodeFragment extends BaseFragment {
             RECDTSApi.getAppRECDTS_hahvdvService().updateHealth(requestData)
                     .compose(new NetTransformer<>(JsonObject.class))
                     .subscribe(new NetSubscriber<>(bean -> {
+
+                        parseHealthDetail(bookId.getText().toString());
+
                         progressDialog.dismiss();
                         ToastUtils.showShort("Submit RECDTS successfully!");
                         bookId.setText("");
@@ -426,6 +432,7 @@ public class BarCodeFragment extends BaseFragment {
                     .compose(new NetTransformer<>(JsonObject.class))
                     .subscribe(new NetSubscriber<>(bean -> {
                         progressDialog.dismiss();
+                        parseHealthDetail(bookId.getText().toString());
                         ToastUtils.showShort("Submit EACPass successfully!");
                         bookId.setText("");
                         clearInput();
@@ -437,6 +444,23 @@ public class BarCodeFragment extends BaseFragment {
                     }));
         }
 
+    }
+
+    private void parseHealthDetail(String c_people_rid){
+        Map<String, String> requestData = new HashMap<>();
+        requestData.put("c_people_rid",c_people_rid);
+        RECDTSApi.getAppHAHVDVService().accountHealthDetail(requestData)
+                .compose(new NetTransformer<>(JsonObject.class))
+                .subscribe(new NetSubscriber<>(bean -> {
+
+                    COVID_19_Bean covid_19_bean = ParseUtils.getCOVID_19_Data(bean);
+                    Vaccination_Bean vaccination_bean = ParseUtils.getVaccination_Data(bean);
+
+                    //todo: you can get COVID-19 Data , Vaccination Data,
+
+                }, e -> {
+                    System.out.println("Failed,please check network");
+                }));
     }
 
     private void clearInput() {
