@@ -456,7 +456,11 @@ public class BarCodeFragment extends BaseFragment {
                     COVID_19_Bean covid_19_bean = ParseUtils.getCOVID_19_Data(bean);
                     Vaccination_Bean vaccination_bean = ParseUtils.getVaccination_Data(bean);
 
-                    //todo: you can get COVID-19 Data , Vaccination Data,
+                    //todo: you can get COVID-19 Data , Vaccination Data,So that they can be displayed on the customized UI
+                    // you can get data like this
+                    String d_covid_specimen_collect = covid_19_bean.getD_covid_specimen_collect();
+                    Log.d("parseHealthDetail",d_covid_specimen_collect);
+                    ToastUtils.showLong(d_covid_specimen_collect);
 
                 }, e -> {
                     System.out.println("Failed,please check network");
